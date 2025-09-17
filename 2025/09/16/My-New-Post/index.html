@@ -1,146 +1,218 @@
-doctype html
-html(lang=config.language)
-  head
-    meta(http-equiv="Content-Type", content="text/html; charset=UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1")
-    meta(name="theme-color", content=theme.colors.primary)
-    meta(name="msapplication-navbutton-color", content=theme.colors.primary)
-    meta(name="apple-mobile-web-app-capable", content="yes")
-    meta(name="apple-mobile-web-app-status-bar-style", content="black-translucent")
+<!DOCTYPE html>
+<html lang="en">
 
-    title= page_title ? page_title + ' - ' + config.title : config.title
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    //- Dark mode script to prevent flash
-    if theme.features && theme.features.dark_mode
-      script.
-        (function() {
-          // 尽早应用暗色模式，防止闪烁
-          var savedDarkMode = localStorage.getItem('darkMode') === 'true';
-          if (savedDarkMode) {
-            document.documentElement.classList.add('dark-mode');
-          }
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>My New Post | netx</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
         })();
+    </script>
 
-    //- Fonts
-    link(rel="preconnect", href="https://fonts.googleapis.com")
-    link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
-    link(href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap", rel="stylesheet")
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Bentham&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
 
-    //- Font Awesome Icons
-    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css")
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Bentham&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
 
-    //- QR Code library for WeChat sharing
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js")
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
 
-    //- RSS
-    if feed
-      link(rel="alternate", href=feed, title=config.title, type="application/atom+xml")
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">My New Post</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
 
-    //- Favicon
-    link(rel="icon", href=url_for(theme.favicon))
+                    
+                        <span class="post-time">
+                        Date: <a href="#">September 16, 2025&nbsp;&nbsp;14:32:15</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
 
-    //- Styles
-    != css('css/main')
-    != css('css/tags')
-    != css('css/categories')
-    != css('css/categories-accordion')
-    != css('css/highlight')
-    != css('css/toc')
-    != css('css/image-zoom')
-    != css('css/share')
-    != css('css/mobile-nav')
-    != css('css/search')
-    != css('css/scrollbar')
-    != css('css/timeline')
-    != css('css/animations')
-    != css('css/ai-theme')
-    != css('css/loading-animation')
-    // 条件加载关于页面样式
-    if page.path === 'about/index.html'
-      != css('css/about')
+        <div class="post-content">
+            
+        </div>
 
-    //- Theme color variables from config
-    style.
-      :root {
-        --primary-color: #{theme.colors.primary};
-        --secondary-color: #{theme.colors.secondary};
-        --accent-color: #{theme.colors.accent};
-        --background-color: #{theme.colors.background};
-        --text-color: #{theme.colors.text};
-        --overlay-color: #{theme.colors.overlay};
-        --tag-background-color: #{theme.colors.tag_background};
-        --card-background-color: #{theme.colors.card_background};
-      }
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2025/09/16/My-New-Post/">http://example.com/2025/09/16/My-New-Post/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
 
-    //- Custom head
-    if theme.custom_head
-      != theme.custom_head
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2025/09/16/hello-world/">Hello World</a>
+            
+        </section>
 
-    //- Inject head
-    if theme.inject && theme.inject.head
-      each item in theme.inject.head
-        != item
 
-  body
-    #app
-      != partial('_partial/header')
-      != partial('_partial/search')
+    </article>
+</div>
 
-      main.main
-        != body
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
 
-      != partial('_partial/footer')
+    </div>
+</body>
 
-    // 立即应用暗色模式，避免页面闪烁
-    if theme.features && theme.features.dark_mode
-      script.
-        (function() {
-          // 检查本地存储中的暗色模式设置
-          const savedDarkMode = localStorage.getItem('darkMode') === 'true';
-          // 如果设置为暗色模式，立即应用到body
-          if (savedDarkMode) {
-            document.body.classList.add('dark-mode');
-          }
-
-          // 防止页面闪烁，在DOM加载完成前设置一个初始类
-          document.documentElement.style.visibility = 'hidden';
-          document.addEventListener('DOMContentLoaded', function() {
-            document.documentElement.style.visibility = 'visible';
-          });
-        })();
-
-    //- Scripts
-    != js('js/main')
-    != js('js/tags')
-    != js('js/categories-accordion')
-    != js('js/highlight')
-    != js('js/load-more')
-    != js('js/header-scroll')
-    != js('js/toc')
-    != js('js/image-zoom')
-    != js('js/share')
-    != js('js/search')
-    != js('js/hide-inline-interaction')
-    != js('js/hide-toggle-interaction')
-    != js('js/dark-mode-sync')
-    != js('js/animations')
-    != js('js/ai-theme')
-    != js('js/loading-animation')
-
-    //- Theme configuration for JavaScript
-    script.
-      window.theme = {
-        features: !{JSON.stringify(theme.features)},
-        code_block: !{JSON.stringify(theme.code_block)},
-        ai_summary: !{JSON.stringify(theme.ai_summary)},
-        categories: !{JSON.stringify(theme.categories)}
-      };
-
-    //- Custom scripts
-    if theme.custom_scripts
-      != theme.custom_scripts
-
-    //- Inject bottom
-    if theme.inject && theme.inject.bottom
-      each item in theme.inject.bottom
-        != item
+</html>
